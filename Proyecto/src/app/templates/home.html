@@ -1,0 +1,32 @@
+<!-- Página principal despues del login -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inicio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> <!-- CSS -->
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+        <!-- Bienvenida -->
+        <h1>🎓 Bienvenido {{ user.nombre_usuario }}</h1>
+        <!-- Rol -->
+        <p>Rol: <strong>{{ user.rol }}</strong></p>
+
+         <!-- Condicional según rol -->
+        {% if user.rol == 'administrador' %}
+            <p class="admin">Eres Administrador</p>
+        {% else %}
+            <p class="user">Eres Usuario</p>
+        {% endif %}
+
+        <!-- Cerrar sesión -->
+        <a href="/" class="logout">Cerrar sesión</a>
+    </div>
+
+</div>
+
+</body>
+</html>

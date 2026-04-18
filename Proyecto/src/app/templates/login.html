@@ -1,0 +1,35 @@
+<!-- Página de inicio de sesión -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> <!-- Conexión al archivo CSS -->
+</head>
+<body>
+
+<div class="container">
+    <!-- Tarjeta del login -->
+    <div class="card">
+        <h1>🎓 Universidad Nacional Autónoma de México</h1>
+        <h2>Sistema de gestión de cursos</h2>
+        <!-- Formulario de login -->
+        <form action="/login" method="POST">
+            <h3>Ingrese su usuario y contraseña</h3>
+            <!-- Campo usuario -->
+            <input type="text" name="username" placeholder="Usuario" required>
+            <!-- Campo contraseña -->
+            <input type="password" name="password" placeholder="Contraseña" required>
+             <!-- Boton -->
+            <button type="submit">Entrar</button>
+
+            <!-- Mensaje de error -->
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>
