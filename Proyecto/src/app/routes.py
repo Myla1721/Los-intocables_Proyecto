@@ -1,38 +1,47 @@
-from flask import Blueprint, render_template, request
-from src.app.models import User
+from flask import Blueprint, redirect, url_for, session, render_template
+from src.app.views.login_view import LoginView
+from src.app.controllers.auth_controller import AuthController
 
+main = Blueprint('main', __name__)
 
-main = Blueprint('main', __name__) #Blueprint para manejar las rutas
 
 @main.route('/')
 def index():
-    """
-    Muestra la página de login.
-    """
-    return render_template('login.html')
+    return LoginView.mostrarFormulario()
+
 
 @main.route('/login', methods=['POST'])
 def login():
-    """
-    Procesa el formulario de inicio de sesión.
+    correo, password = LoginView.obtenerCredenciales()
 
-    Obtiene los datos del formulario (usuario y contraseña) y verifica si existen en la base de datos y redirige:
+    user = AuthController.login(correo, password)
 
-    - Si el usuario existe: muestra la página principal (home)
-    - Si no existe: regresa al login con mensaje de error
-    """
-    #Obtenemos los datos del formulario
-    username = request.form['username']
-    password = request.form['password']
-
-    #Buscamos al usuario en la base de datos
-    user = User.query.filter_by(
-        nombre_usuario=username,
-        contrasena=password
-    ).first()
-
-    #Verificamos si el usuario existe
     if user:
-        return render_template('home.html', user=user)
+        session['user_id'] = user.id_usuario
+        session['nombre'] = user.nombre
+        session['rol'] = user.rol
+
+        return redirect(url_for('main.home'))
     else:
-        return render_template('login.html', error="Usuario o contraseña incorrectos")
+        return LoginView.mostrarError()
+
+
+@main.route('/home')
+def home():
+    if 'user_id' not in session:
+        return redirect(url_for('main.index'))
+
+    return render_template(
+        'home.html',
+        nombre=session['nombre'],
+        rol=session['rol']
+    )
+
+
+@main.route('/logout')
+def logout():
+    if 'user_id' in session:
+        AuthController.logout(session['user_id'])
+
+    session.clear()
+    return redirect(url_for('main.index'))

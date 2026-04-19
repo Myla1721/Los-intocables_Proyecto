@@ -12,7 +12,13 @@ class User(db.Model):
     """
     __tablename__ = "Usuario"
 
-    id = db.Column(db.Integer, primary_key=True)
-    nombre_usuario = db.Column(db.String(50))
-    contrasena = db.Column(db.String(50))
-    rol = db.Column(db.String(20))
+    id_usuario = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100), nullable=False)
+    apellido = db.Column(db.String(100), nullable=False)
+    correo = db.Column(db.String(150), unique=True, nullable=False)
+    contrasena = db.Column(db.String(255), nullable=False)
+    rol = db.Column(db.Enum('ADMIN', 'PROFESOR', 'ALUMNO'), nullable=False)
+
+    fecha_registro = db.Column(db.DateTime)
+    sesion_activa = db.Column(db.Boolean, default=False)
+    ultimo_acceso = db.Column(db.DateTime)

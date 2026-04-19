@@ -8,24 +8,22 @@
 <body>
 
 <div class="container">
-
     <div class="card">
-        <!-- Bienvenida -->
-        <h1>🎓 Bienvenido {{ user.nombre_usuario }}</h1>
-        <!-- Rol -->
-        <p>Rol: <strong>{{ user.rol }}</strong></p>
 
-         <!-- Condicional según rol -->
-        {% if user.rol == 'administrador' %}
+        <h1>🎓 Bienvenido {{ nombre }}</h1>
+        <p>Rol: <strong>{{ rol }}</strong></p>
+
+        {% if rol == 'ADMIN' %}
             <p class="admin">Eres Administrador</p>
+        {% elif rol == 'PROFESOR' %}
+            <p class="user">Eres Profesor</p>
         {% else %}
-            <p class="user">Eres Usuario</p>
+            <p class="user">Eres Alumno</p>
         {% endif %}
 
-        <!-- Cerrar sesión -->
-        <a href="/" class="logout">Cerrar sesión</a>
-    </div>
+        <a href="/logout" class="logout">Cerrar sesión</a>
 
+    </div>
 </div>
 
 </body>

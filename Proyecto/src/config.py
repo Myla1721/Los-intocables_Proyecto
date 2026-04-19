@@ -8,11 +8,11 @@ class Config:
     """
     SQLALCHEMY_DATABASE_URI = URL.create( #URI de conexión a la base de datos
         drivername="mysql+pymysql",
-        username="ericko",
-        password="MPyAlqm2005_",
+        username="intocable",
+        password="Ing2026!",
         host="localhost",
         port=3306,
-        database="practica4"
+        database="GestionCursosBD"
     )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False #Desactiva notificaciones innecesarias de SQLAlchemy
