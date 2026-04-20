@@ -31,7 +31,8 @@ def obtener_id_profesor_desde_usuario(user_id):
 
 def obtener_cursos_disponibles(user_id=None):
     """
-    Obtiene los cursos del profesor
+    Obtiene los cursos del profesor.
+    Si no tiene cursos, crea uno de demostración automáticamente.
     
     Args:
         user_id (int): ID del usuario (profesor)
@@ -42,8 +43,27 @@ def obtener_cursos_disponibles(user_id=None):
     if user_id:
         # Obtener el id_profesor correspondiente al usuario
         id_profesor = obtener_id_profesor_desde_usuario(user_id)
+        
         if id_profesor:
             cursos = Curso.query.filter_by(id_profesor=id_profesor).all()
+            
+            # Si no tiene cursos, crear uno de demostración
+            if not cursos:
+                curso_demo = Curso(
+                    nombre="Inglés Básico A1 (Demo)",
+                    descripcion="Curso de demostración para probar funcionalidades",
+                    categoria="Idiomas",
+                    id_profesor=id_profesor
+                )
+                try:
+                    db.session.add(curso_demo)
+                    db.session.commit()
+                    cursos = [curso_demo]
+                    print("✅ Curso de demostración creado automáticamente")
+                except Exception as e:
+                    db.session.rollback()
+                    print(f"Error al crear curso demo: {e}")
+                    cursos = []
         else:
             cursos = []
     else:

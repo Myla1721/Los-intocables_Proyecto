@@ -31,9 +31,13 @@ class ProfesorView:
         profesor_id = session['user_id']
         cursos = obtener_cursos_disponibles(profesor_id)
         
+        # Mensaje informativo si es un curso demo
+        if cursos and "Demo" in cursos[0].nombre:
+            flash('ℹ️ Este es un curso de demostración. Puedes subir y eliminar material para probar.', 'info')
+        
         return render_template('profesor/cursos.html', 
-                             cursos=cursos, 
-                             nombre=session.get('nombre'))
+                            cursos=cursos, 
+                            nombre=session.get('nombre'))
     
     @classmethod
     def subir_material(cls, curso_id):
