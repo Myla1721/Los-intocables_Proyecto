@@ -1,82 +1,151 @@
-PRACTICA 4 - LOGIN FLASK
+================================================================================
+                    GESTIÓN DE CURSOS DE IDIOMAS
+                    Los Intocables - Proyecto Final
+                    Ingeniería en Software
+================================================================================
 
-Luis Juárez Erick
+AUTORA DE UNA PARTE DEL MÓDULO DE PROFESOR 
+------------------------------------------
+Camila Sánchez Flores
 
-Descripción:
-Este proyecto consiste en una aplicación web desarrollada con Flask que implementa un sistema de login conectado a una base de datos MySQL
+================================================================================
+DESCRIPCIÓN DEL PROYECTO
+================================================================================
 
+Sistema web para la gestión de cursos de idiomas con tres tipos de usuarios:
+- Administrador: Gestiona cuentas de profesores y usuarios
+- Profesor: Gestiona cursos y materiales
+- Alumno: Se inscribe a cursos y consulta material
 
-REQUISITOS
+================================================================================
+MÓDULO DESARROLLADO: PROFESOR
+================================================================================
 
-- Python 3.12
-- MySQL Server
-- pip
+CASOS DE USO IMPLEMENTADOS:
 
+[✅] Ver cursos disponibles
+     El profesor puede visualizar todos los cursos que tiene asignados
 
-INSTALACIÓN
+[✅] Subir material
+     El profesor puede subir archivos (PDF, Word, imágenes, videos) a sus cursos
 
+[✅] Eliminar material
+     El profesor puede eliminar materiales previamente subidos
 
-1. Clonar o descargar el proyecto.
+FUNCIONALIDADES ADICIONALES:
 
-2. Crear un entorno virtual:
+- Creación automática de curso de demostración si no hay cursos asignados
+- Validación de permisos por rol (solo accesible para PROFESOR)
+- Interfaz responsive con Bootstrap 5
+- Mensajes de confirmación para acciones críticas
+- Manejo seguro de archivos con nombres únicos
 
-   python3 -m venv .venv
+================================================================================
+TECNOLOGÍAS UTILIZADAS
+================================================================================
 
-3. Activar el entorno virtual:
+Python 3         - Lenguaje de programación principal
+Flask            - Framework web
+SQLAlchemy       - ORM para base de datos
+SQLite           - Base de datos (desarrollo/pruebas)
+MySQL            - Base de datos (producción)
+Bootstrap 5      - Framework CSS para interfaz
+Jinja2           - Motor de plantillas
+Werkzeug         - Manejo seguro de archivos
 
-   En Linux:
-   source .venv/bin/activate
+================================================================================
+ESTRUCTURA DE ARCHIVOS DEL MÓDULO
+================================================================================
 
-4. Instalar dependencias:
+src/app/
+├── models/
+│   ├── curso.py              # Modelo de Curso
+│   ├── material.py           # Modelo de Material
+│   └── profesor.py           # Modelo de Profesor
+├── controllers/
+│   └── profesor_controller.py # Lógica de negocio del profesor
+├── views/
+│   └── profesor_view.py      # Vistas y validaciones del profesor
+├── templates/
+│   └── profesor/
+│       └── cursos.html       # Interfaz de gestión de cursos
+├── static/
+│   └── uploads/              # Archivos subidos por profesores
+└── routes.py                 # Rutas del módulo (/profesor/*)
 
+================================================================================
+INSTALACIÓN Y EJECUCIÓN
+================================================================================
+
+1. Clonar el repositorio
+   git clone https://github.com/Myla1721/Los-intocables_Proyecto.git
+   cd Los-intocables_Proyecto/Proyecto
+
+2. Crear y activar entorno virtual
+   python -m venv .venv
+   .venv\Scripts\activate
+
+3. Instalar dependencias
    pip install -r requirements.txt
 
-
-
-
-CONFIGURACIÓN DE BASE DE DATOS
-
-
-1. Abrir MySQL.
-
-2. Ejecutar el archivo SQL proporcionado:
-
-   Practica4.sql
-
-   Esto creará:
-   - Base de datos: practica4
-   - Tabla: Usuario
-   - Usuarios de prueba
-
-3. Verificar credenciales en config.py:
-
-   username = ericko
-   password = MPyAlqm2005_
-   database = practica4
-
-
-EJECUCIÓN
-
-1. Posicionar en la carpeta Practica4 con cd Practica4
-
-2. Ejecutar la aplicación:
-
+4. Ejecutar la aplicación
    python run.py
 
-3. Abrir navegador en:
+5. Acceder al sistema
+   URL: http://127.0.0.1:5000
+   Usuario Profesor: charlier45@correo.com
+   Contraseña: MPyAlqm1990
 
-   http://127.0.0.1:5000
+================================================================================
+EVIDENCIA DEL FUNCIONAMIENTO
+================================================================================
 
+[ ] Página de Inicio del Profesor
+[ ] Gestión de Cursos y Materiales
+[ ] Subida de Material
+[ ] Eliminación de Material
 
-USO
+================================================================================
+FLUJO DE TRABAJO CON GIT
+================================================================================
 
+# Rama de desarrollo
+git checkout rama-lider
 
-- Ingresar un usuario y contraseña de la base de datos.
-- Si las credenciales son correctas:
-  → Se muestra una pantalla de bienvenida con el rol.
-- Si son incorrectas:
-  → Se muestra un mensaje de error.
+# Agregar cambios
+git add .
 
+# Commit
+git commit -m "Módulo de Profesor completo"
 
+# Subir a GitHub
+git push origin rama-lider
 
+================================================================================
+EQUIPO DE DESARROLLO
+================================================================================
 
+Nombre                    Rol              Módulo
+----------------------------------------------------------------------------
+Camila Sánchez Flores     Desarrolladora   Profesor (Ver cursos, Subir/Eliminar)
+[Compañero]               Desarrollador    Profesor (Crear/Modificar/Eliminar)
+[Compañero]               Desarrollador    Administrador
+[Compañero]               Desarrollador    Alumno
+
+================================================================================
+FECHA DE ENTREGA
+================================================================================
+
+20 de abril de 2026
+
+================================================================================
+NOTAS
+================================================================================
+
+- El proyecto utiliza SQLite para desarrollo y pruebas locales
+- La configuración de MySQL está preparada para producción
+- Los archivos subidos se almacenan en src/app/static/uploads/
+
+================================================================================
+© 2026 Los Intocables - Todos los derechos reservados.
+================================================================================
