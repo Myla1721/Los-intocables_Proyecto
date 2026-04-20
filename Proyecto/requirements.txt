@@ -4,4 +4,4 @@ SQLAlchemy==2.0.45
 PyMySQL==1.1.2
 Werkzeug==3.1.4
 Jinja2==3.1.6
-criptography==3.4.8
+cryptography==3.4.8

@@ -15,7 +15,7 @@ class ProfesorView:
     @staticmethod
     def verificar_rol_profesor():
         """Verifica si el usuario es profesor"""
-        return session.get('rol') == 'profesor'
+        return session.get('rol') == 'PROFESOR'
     
     @classmethod
     def ver_cursos(cls):
