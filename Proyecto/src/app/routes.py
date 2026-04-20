@@ -1,6 +1,7 @@
 from flask import Blueprint, redirect, url_for, session, render_template
 from src.app.views.login_view import LoginView
 from src.app.controllers.auth_controller import AuthController
+from src.app.views.profesor_view import ProfesorView
 
 main = Blueprint('main', __name__)
 
@@ -45,3 +46,19 @@ def logout():
 
     session.clear()
     return redirect(url_for('main.index'))
+
+# ============ RUTAS DEL PROFESOR ============
+@main.route('/profesor/cursos')
+def profesor_cursos():
+    """Página principal del profesor - Ver sus cursos"""
+    return ProfesorView.ver_cursos()
+
+@main.route('/profesor/subir-material/<int:curso_id>', methods=['POST'])
+def profesor_subir_material(curso_id):
+    """Subir material a un curso específico"""
+    return ProfesorView.subir_material(curso_id)
+
+@main.route('/profesor/eliminar-material/<int:material_id>')
+def profesor_eliminar_material(material_id):
+    """Eliminar material de un curso"""
+    return ProfesorView.eliminar_material(material_id)
