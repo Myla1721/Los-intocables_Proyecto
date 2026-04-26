@@ -44,6 +44,24 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
+
+        <div class="card p-3 mb-4 shadow-sm">
+            <h5>➕ Crear nuevo curso</h5>
+            <form action="{{ url_for('main.profesor_crear_curso') }}" method="POST">
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="text" name="nombre" class="form-control" placeholder="Nombre del curso" required>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" name="categoria" class="form-control" placeholder="Categoría">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" name="descripcion" class="form-control" placeholder="Descripción">
+                    </div>
+                </div>
+                <button class="btn btn-success mt-2">Crear</button>
+            </form>
+        </div>
         
         <div class="row mt-4">
             {% if cursos %}
@@ -54,6 +72,20 @@
                             <h5 class="mb-0">{{ curso.nombre }}</h5>
                         </div>
                         <div class="card-body">
+
+                            <form action="{{ url_for('main.profesor_editar_curso', curso_id=curso.id_curso) }}" method="POST" class="mb-3">
+                                <input type="text" name="nombre" value="{{ curso.nombre }}" class="form-control mb-1" required>
+                                <input type="text" name="categoria" value="{{ curso.categoria }}" class="form-control mb-1">
+                                <input type="text" name="descripcion" value="{{ curso.descripcion }}" class="form-control mb-1">
+                                <button class="btn btn-warning btn-sm">✏️ Editar</button>
+                            </form>
+
+                            <a href="{{ url_for('main.profesor_eliminar_curso', curso_id=curso.id_curso) }}"
+                               class="btn btn-danger btn-sm mb-3"
+                               onclick="return confirm('¿Eliminar curso completo?')">
+                               🗑️ Eliminar curso
+                            </a>
+
                             <p><strong>📝 Descripción:</strong> {{ curso.descripcion or 'Sin descripción' }}</p>
                             <p><strong>🏷️ Categoría:</strong> {{ curso.categoria or 'General' }}</p>
                             

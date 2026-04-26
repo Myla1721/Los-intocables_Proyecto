@@ -29,6 +29,64 @@ def obtener_id_profesor_desde_usuario(user_id):
         return profesor.id_profesor
     return None
 
+def crear_curso(user_id, nombre, descripcion, categoria):
+    id_profesor = obtener_id_profesor_desde_usuario(user_id)
+
+    if not id_profesor:
+        return {'exito': False, 'mensaje': 'No se encontró el profesor'}
+
+    curso = Curso(
+        nombre=nombre,
+        descripcion=descripcion,
+        categoria=categoria,
+        id_profesor=id_profesor
+    )
+
+    try:
+        db.session.add(curso)
+        db.session.commit()
+        return {'exito': True, 'mensaje': 'Curso creado correctamente'}
+    except Exception as e:
+        db.session.rollback()
+        return {'exito': False, 'mensaje': str(e)}
+
+
+def editar_curso(curso_id, user_id, nombre, descripcion, categoria):
+    id_profesor = obtener_id_profesor_desde_usuario(user_id)
+
+    curso = Curso.query.filter_by(id_curso=curso_id, id_profesor=id_profesor).first()
+
+    if not curso:
+        return {'exito': False, 'mensaje': 'Curso no encontrado'}
+
+    curso.nombre = nombre
+    curso.descripcion = descripcion
+    curso.categoria = categoria
+
+    try:
+        db.session.commit()
+        return {'exito': True, 'mensaje': 'Curso actualizado'}
+    except Exception as e:
+        db.session.rollback()
+        return {'exito': False, 'mensaje': str(e)}
+
+
+def eliminar_curso(curso_id, user_id):
+    id_profesor = obtener_id_profesor_desde_usuario(user_id)
+
+    curso = Curso.query.filter_by(id_curso=curso_id, id_profesor=id_profesor).first()
+
+    if not curso:
+        return {'exito': False, 'mensaje': 'Curso no encontrado'}
+
+    try:
+        db.session.delete(curso)
+        db.session.commit()
+        return {'exito': True, 'mensaje': 'Curso eliminado'}
+    except Exception as e:
+        db.session.rollback()
+        return {'exito': False, 'mensaje': str(e)}
+
 def obtener_cursos_disponibles(user_id=None):
     """
     Obtiene los cursos del profesor.

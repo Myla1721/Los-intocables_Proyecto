@@ -2,7 +2,10 @@ from flask import render_template, redirect, url_for, request, flash, session
 from src.app.controllers.profesor_controller import (
     obtener_cursos_disponibles,
     subir_material_curso,
-    eliminar_material_curso
+    eliminar_material_curso,
+    crear_curso,
+    editar_curso,
+    eliminar_curso
 )
 
 class ProfesorView:
@@ -38,6 +41,44 @@ class ProfesorView:
         return render_template('profesor/cursos.html', 
                             cursos=cursos, 
                             nombre=session.get('nombre'))
+
+    @classmethod
+    def crear_curso(cls):
+        if not cls.verificar_autenticacion():
+            return redirect(url_for('main.index'))
+
+        nombre = request.form.get('nombre')
+        descripcion = request.form.get('descripcion')
+        categoria = request.form.get('categoria')
+
+        resultado = crear_curso(
+            session['user_id'], nombre, descripcion, categoria
+        )
+
+        flash(resultado['mensaje'], 'success' if resultado['exito'] else 'danger')
+        return redirect(url_for('main.profesor_cursos'))
+
+    @classmethod
+    def editar_curso(cls, curso_id):
+        nombre = request.form.get('nombre')
+        descripcion = request.form.get('descripcion')
+        categoria = request.form.get('categoria')
+
+        resultado = editar_curso(
+            curso_id, session['user_id'], nombre, descripcion, categoria
+        )
+
+        flash(resultado['mensaje'], 'success' if resultado['exito'] else 'danger')
+        return redirect(url_for('main.profesor_cursos'))
+
+    @classmethod
+    def eliminar_curso(cls, curso_id):
+        resultado = eliminar_curso(
+            curso_id, session['user_id']
+        )
+
+        flash(resultado['mensaje'], 'success' if resultado['exito'] else 'danger')
+        return redirect(url_for('main.profesor_cursos'))
     
     @classmethod
     def subir_material(cls, curso_id):

@@ -53,6 +53,18 @@ def profesor_cursos():
     """Página principal del profesor - Ver sus cursos"""
     return ProfesorView.ver_cursos()
 
+@main.route('/profesor/crear-curso', methods=['POST'])
+def profesor_crear_curso():
+    return ProfesorView.crear_curso()
+
+@main.route('/profesor/editar-curso/<int:curso_id>', methods=['POST'])
+def profesor_editar_curso(curso_id):
+    return ProfesorView.editar_curso(curso_id)
+
+@main.route('/profesor/eliminar-curso/<int:curso_id>')
+def profesor_eliminar_curso(curso_id):
+    return ProfesorView.eliminar_curso(curso_id)
+
 @main.route('/profesor/subir-material/<int:curso_id>', methods=['POST'])
 def profesor_subir_material(curso_id):
     """Subir material a un curso específico"""
