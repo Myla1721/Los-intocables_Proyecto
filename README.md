@@ -7,7 +7,8 @@ Equipo Los Intocables
 
 - *Módulo de Profesor*: Camila Sánchez Flores y Erick Luis Juárez
 - *Módulo de Alumno*: Iñaki Cornejo de la Mora
-
+- *Módulo de Administrador*: Lugo Díaz Ordaz Gretel Alexandra
+  
 ## Descripción del Proyecto
 
 Sistema web para la gestión de cursos de idiomas con tres tipos de usuarios:
