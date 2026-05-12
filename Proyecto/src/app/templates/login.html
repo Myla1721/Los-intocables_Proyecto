@@ -3,32 +3,33 @@
 <html>
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> <!-- Conexión al archivo CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
 <div class="container">
-    <!-- Tarjeta del login -->
     <div class="card">
         <h1>🎓 Universidad Nacional</h1>
         <h2>Sistema de gestión de cursos</h2>
-        <!-- Formulario de login -->
         <form action="/login" method="POST">
             <h3>Ingrese su usuario y contraseña</h3>
-            <!-- Campo usuario -->
             <input type="text" name="correo" placeholder="Correo" required>
-            <!-- Campo contraseña -->
             <input type="password" name="password" placeholder="Contraseña" required>
-             <!-- Boton -->
             <button type="submit">Entrar</button>
 
-            <!-- Mensaje de error -->
             {% if error %}
                 <p class="error">{{ error }}</p>
             {% endif %}
         </form>
-    </div>
 
+        <hr style="margin: 15px 0;">
+        <p style="font-size: 0.9em; color: #666;">¿No tienes cuenta?</p>
+        <a href="{{ url_for('main.alumno_registro_form') }}"
+           style="display:inline-block; padding:8px 16px; background:#28a745; color:white;
+                  border-radius:5px; text-decoration:none; font-size:0.9em;">
+            ✏️ Crear cuenta de alumno
+        </a>
+    </div>
 </div>
 
 </body>
