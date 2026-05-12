@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Cursos - Alumno</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">🎓 Gestión de Cursos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('main.home') }}">🏠 Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('main.alumno_cursos') }}">📖 Cursos Disponibles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('main.alumno_mis_cursos') }}">📚 Mis Cursos</a>
+                    </li>
+                </ul>
+                <div class="navbar-nav">
+                    <span class="nav-link text-white">👤 {{ nombre }} (Alumno)</span>
+                    <a class="nav-link text-danger" href="{{ url_for('main.logout') }}">🚪 Cerrar Sesión</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+
+        <h2>📚 Mis Cursos</h2>
+        <p class="text-muted">Cursos en los que estás inscrito. Selecciona uno para ver su material.</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% if cursos %}
+            <div class="row mt-3">
+                {% for curso in cursos %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm border-primary">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">{{ curso.nombre }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text text-muted">
+                                {{ curso.descripcion or 'Sin descripción disponible.' }}
+                            </p>
+                            <span class="badge bg-secondary mb-2">🏷️ {{ curso.categoria or 'General' }}</span>
+                            <p class="small text-muted mb-0">
+                                📎 {{ curso.materiales | length }} material(es) disponible(s)
+                            </p>
+                        </div>
+                        <div class="card-footer bg-white border-top-0">
+                            <a href="{{ url_for('main.alumno_material_curso', curso_id=curso.id_curso) }}"
+                               class="btn btn-primary w-100">
+                                📂 Ver Material
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-warning mt-3">
+                <h5>📭 Aún no estás inscrito en ningún curso.</h5>
+                <p>Explora los cursos disponibles e inscríbete en los que te interesen.</p>
+                <a href="{{ url_for('main.alumno_cursos') }}" class="btn btn-primary">
+                    📖 Ver Cursos Disponibles
+                </a>
+            </div>
+        {% endif %}
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
