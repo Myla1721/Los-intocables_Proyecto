@@ -2,9 +2,12 @@ from flask import Blueprint, redirect, url_for, session, render_template
 from src.app.views.login_view import LoginView
 from src.app.controllers.auth_controller import AuthController
 from src.app.views.profesor_view import ProfesorView
+from src.app.views.alumno_view import AlumnoView
 
 main = Blueprint('main', __name__)
 
+
+# ============ RUTAS GENERALES ============
 
 @main.route('/')
 def index():
@@ -47,7 +50,9 @@ def logout():
     session.clear()
     return redirect(url_for('main.index'))
 
+
 # ============ RUTAS DEL PROFESOR ============
+
 @main.route('/profesor/cursos')
 def profesor_cursos():
     """Página principal del profesor - Ver sus cursos"""
@@ -74,3 +79,36 @@ def profesor_subir_material(curso_id):
 def profesor_eliminar_material(material_id):
     """Eliminar material de un curso"""
     return ProfesorView.eliminar_material(material_id)
+
+
+# ============ RUTAS DEL ALUMNO ============
+
+@main.route('/alumno/registro', methods=['GET'])
+def alumno_registro_form():
+    """Formulario de registro de alumno"""
+    return AlumnoView.mostrar_registro()
+
+@main.route('/alumno/registro', methods=['POST'])
+def alumno_registro():
+    """Procesa el registro de un nuevo alumno"""
+    return AlumnoView.procesar_registro()
+
+@main.route('/alumno/cursos')
+def alumno_cursos():
+    """Ver todos los cursos disponibles en la plataforma"""
+    return AlumnoView.ver_cursos_disponibles()
+
+@main.route('/alumno/inscribirse/<int:curso_id>', methods=['POST'])
+def alumno_inscribirse(curso_id):
+    """Inscribir al alumno en un curso"""
+    return AlumnoView.inscribirse(curso_id)
+
+@main.route('/alumno/mis-cursos')
+def alumno_mis_cursos():
+    """Ver los cursos en los que el alumno está inscrito"""
+    return AlumnoView.ver_mis_cursos()
+
+@main.route('/alumno/mis-cursos/<int:curso_id>/material')
+def alumno_material_curso(curso_id):
+    """Ver el material de un curso inscrito"""
+    return AlumnoView.ver_material_curso(curso_id)
