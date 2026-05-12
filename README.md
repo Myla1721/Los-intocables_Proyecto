@@ -20,6 +20,12 @@ Sistema web para la gestión de cursos de idiomas con tres tipos de usuarios:
 
 ### Casos de Uso
 
+- [x] Iniciar sesion
+El usuario inicia sesion en el sistema.
+
+- [x] Cerrar sesion
+El usuario cierra sesion en el sistema.
+
 - [x] Crear cuenta de usuario
 El alumno puede crear una cuenta de ususario.
 
