@@ -6,6 +6,7 @@ Equipo Los Intocables
 ## Autores
 
 - *Módulo de Profesor*: Camila Sánchez Flores y Erick Luis Juárez
+- *Módulo de Alumno*: Iñaki Cornejo de la Mora
 
 ## Descripción del Proyecto
 
@@ -19,6 +20,18 @@ Sistema web para la gestión de cursos de idiomas con tres tipos de usuarios:
 
 ### Casos de Uso
 
+- [x] Crear cuenta de usuario
+El alumno puede crear una cuenta de ususario.
+
+- [x] Ver cursos disponibles (Alumno)
+El alumno puede ver todos los cursos disponibles en la plataforma.
+
+- [x] Inscribirse a un curso.
+El alumno puede inscribirse a un curso.
+
+- [x] Consultar material.
+El alumno puede acceder al material de los cursos a los que está inscrito.
+
 - [x] Crear curso
 El profesor crear un curso.
 
@@ -28,13 +41,13 @@ El profesor eliminar un curso que haya creado previamente.
 - [x] Modificar curso
 El profesor modifica la información de un curso existente.
 
-- [X] Ver cursos disponibles
+- [x] Ver cursos disponibles (Profesor)
 El profesor puede visualizar todos los cursos que tiene asignados.
 
-- [X] Subir material
+- [x] Subir material
 El profesor puede subir archivos (PDF, Word, imágenes, videos) a sus cursos.
 
-- [X] Eliminar material
+- [x] Eliminar material
 El profesor puede eliminar materiales previamente subidos.
 
 ### Funcionalidades Adicionales:
@@ -115,16 +128,16 @@ python run.py
 
 ## Equipo de Desarrollo
 
-| Nombre                | Rol            | Módulo                                |
-|-----------------------|----------------|---------------------------------------|
-| Camila Sánchez Flores | Desarrolladora | Profesor (Ver cursos, Subir/Eliminar) |
-| Erick Luis Juárez     | Desarrollador  | Profesor (Crear/Modificar/Eliminar)   |
-| [Compañero]           | Desarrollador  | Administrador                         |
-| [Compañero]           | Desarrollador  | Alumno                                |
+| Nombre                   | Rol            | Módulo                                |
+|--------------------------|----------------|---------------------------------------|
+| Camila Sánchez Flores    | Desarrolladora | Profesor (Ver cursos, Subir/Eliminar) |
+| Erick Luis Juárez        | Desarrollador  | Profesor (Crear/Modificar/Eliminar)   |
+| [Compañero]              | Desarrollador  | Administrador                         |
+| Iñaki Cornejo de la Mora | Desarrollador  | Alumno                                |
 
 ## Fecha de Entrega
 
-20 de abril de 2026
+11 de mayo de 2026
 
 ## Notas
 
