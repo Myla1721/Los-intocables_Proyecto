@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material - {{ curso.nombre }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">🎓 Gestión de Cursos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('main.home') }}">🏠 Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('main.alumno_cursos') }}">📖 Cursos Disponibles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('main.alumno_mis_cursos') }}">📚 Mis Cursos</a>
+                    </li>
+                </ul>
+                <div class="navbar-nav">
+                    <span class="nav-link text-white">👤 {{ nombre }} (Alumno)</span>
+                    <a class="nav-link text-danger" href="{{ url_for('main.logout') }}">🚪 Cerrar Sesión</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('main.alumno_mis_cursos') }}">Mis Cursos</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ curso.nombre }}</li>
+            </ol>
+        </nav>
+
+        <!-- Cabecera del curso -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">📘 {{ curso.nombre }}</h3>
+            </div>
+            <div class="card-body">
+                <p class="mb-1"><strong>📝 Descripción:</strong> {{ curso.descripcion or 'Sin descripción.' }}</p>
+                <p class="mb-0"><strong>🏷️ Categoría:</strong> {{ curso.categoria or 'General' }}</p>
+            </div>
+        </div>
+
+        <!-- Material del curso -->
+        <h4>📎 Material del Curso</h4>
+
+        {% if materiales %}
+            <div class="list-group mt-3">
+                {% for material in materiales %}
+                <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <div>
+                        <span class="fw-semibold">📄 {{ material.nombre }}</span>
+                        <small class="text-muted ms-2">
+                            — subido el {{ material.fecha_subida.strftime('%d/%m/%Y') if material.fecha_subida else 'N/A' }}
+                        </small>
+                    </div>
+                    <a href="{{ material.archivo_url }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                        👁️ Ver / Descargar
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info mt-3">
+                <h5>📭 No hay material disponible aún.</h5>
+                <p class="mb-0">El profesor todavía no ha subido material para este curso.</p>
+            </div>
+        {% endif %}
+
+        <div class="mt-4">
+            <a href="{{ url_for('main.alumno_mis_cursos') }}" class="btn btn-secondary">
+                ← Volver a Mis Cursos
+            </a>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
