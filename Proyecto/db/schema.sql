@@ -106,14 +106,3 @@ CREATE TABLE Inscripcion (
 
     CONSTRAINT unique_inscripcion UNIQUE (id_alumno, id_curso)
 );
-
-CREATE USER 'intocable'@'localhost' IDENTIFIED BY 'Ing2026!';
-GRANT ALL PRIVILEGES ON GestionCursosBD.* TO 'intocable'@'localhost';
-FLUSH PRIVILEGES;
-
-INSERT INTO Usuario (nombre, apellido, correo, contrasena, rol, fecha_registro, sesion_activa, ultimo_acceso) VALUES
-('Juan', 'Pérez', 'juan54@correo.com', 'you345', 'ALUMNO', NOW(), FALSE, NULL),
-('Maria', 'Lopez', 'maria_lopez@correo.com', 'abc123', 'ADMIN', NOW(), FALSE, NULL),
-('Carlos', 'Ruiz', 'charlier45@correo.com', 'MPyAlqm1990', 'PROFESOR', NOW(), FALSE, NULL),
-('Ana', 'Gomez', 'angom33@correo.com', 'gomgom3344', 'ALUMNO', NOW(), FALSE, NULL),
-('Luis', 'Martinez', 'luismar56@correo.com', '654marluis', 'PROFESOR', NOW(), FALSE, NULL);

@@ -96,12 +96,19 @@ source .venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
-4. Ejecutar la aplicación
+4. Crear base de datos
+```
+sudo mysql < db/schema.sql
+```
+
+Además hay que modificar Proyecto/src/config.py reemplazando USER y PASSWORD por los valores correspondientes.
+
+5. Ejecutar la aplicación
 ```
 python run.py
 ```
 
-5. Acceder al sistema
+6. Acceder al sistema
 - URL: http://127.0.0.1:5000
 - Usuario Profesor: charlier45@correo.com
 - Contraseña: MPyAlqm1990
